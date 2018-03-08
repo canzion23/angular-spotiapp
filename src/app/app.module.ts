@@ -1,5 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
+
 
 // Rutas
 import { APP_ROUTING } from './app.routes';
@@ -12,18 +16,30 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 
 
+// Servicios
+import { SpotifyService } from './services/spotify.service';
+import { NoimagenPipe } from './pipes/noimagen.pipe';
+import { ArtistComponent } from './components/artist/artist.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     SearchComponent,
-    NavbarComponent
+    NavbarComponent,
+    NoimagenPipe,
+    ArtistComponent
   ],
   imports: [
     BrowserModule,
-    APP_ROUTING
+    APP_ROUTING,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    SpotifyService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

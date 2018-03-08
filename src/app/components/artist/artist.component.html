@@ -1,0 +1,30 @@
+<div class="container top30">
+    <div class="row">
+        <div class="col-md-5">
+            <img class="img-resposive img-circle" [src]="artista.images | noimagen">
+        </div>
+        <div class="col-md-7">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ artista.name }}</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="#" class="btn btn-secondary btn-block">Back...</a></li>
+                        <li class="list-group-item"><a href="#" class="card-link">Go to Spotify</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="list-group">
+                <button type="button" class="list-group-item list-group-item-action text-white bg-dark">
+                  Top tracks
+              </button>
+                <button type="button" class="list-group-item list-group-item-action" *ngFor="let artista of _spotify.artistas">{{artista.name}}</button>
+            </div>
+
+        </div>
+
+    </div>
