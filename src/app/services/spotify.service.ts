@@ -2,18 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
-
-
 @Injectable()
 export class SpotifyService {
 
   // Arreglo de artistas devueltos por el API de Spotify
-  artistas: any[] = [];
+  artistas_1: any[] = [];
+  tracks: any[] = [];
+
   urlSpotify: string = 'https://api.spotify.com/v1/';
-  token: string = 'BQA_AoEtloaZhFXtFiwr6v0iHjlhaA89vLEZAmVv4GZgkyq4UTEIjwDLDcMqFpbZW0XA0tlijGlK8UnmZlY';
+  token: string = 'BQAPiBIqvF9UvgK1cPc1X6RztsvD8WgSFh60V4kBe4AsuHRMYQ6o4IhNFEWeX-B7Rz3Sw3zwh51y5xJ_uow';
 
   constructor(public http: HttpClient) {
     console.log('Servicio Spotify, listo!');
+
   }
 
   private getHeaders(): HttpHeaders {
@@ -24,36 +25,41 @@ export class SpotifyService {
     return headers;
   }
 
-  getTop(id: string) {
-    
-    let url = `${this.urlSpotify}artists/${id }/top-tracks?country=US`;
-    let headers = this.getHeaders();
-
-    return this.http.get(url, { headers });
-  }
-
-  getArtista( id: string ) {
-    let url = `${ this.urlSpotify }artists/${ id }`;
-    let headers = this.getHeaders();
-
-    return this.http.get(url, { headers });
-        // .map((resp: any) => {
-        //   this.artistas = resp.artists.items;
-        //   return this.artistas;
-        // });
-  }
-
+  // Metodo del servicio que obtiene los artistas coincidentes con el término de busqueda.
   getArtistas(termino: string) {
 
-    let url = `${ this.urlSpotify }search?query=${ termino }&type=artist&&limit=20`;
+    let url = `${this.urlSpotify}search?query=${termino}&type=artist&&limit=20`;
     let headers = this.getHeaders();
 
     return this.http.get(url, { headers })
-        .map( (resp: any) => {
-          this.artistas = resp.artists.items;
-          return this.artistas;
-          });
-
+      .map((resp: any) => {
+        this.artistas_1 = resp.artists.items;
+        // console.log(this.artistas_1);
+        return this.artistas_1;
+      });
   }
 
-}
+  getTopTracks( id: string ) {
+    let url = `${this.urlSpotify}artists/${id}/top-tracks?country=US`;
+    let headers = this.getHeaders();
+
+    return this.http.get(url, { headers } )
+    .map( (resp: any ) => {
+      this.tracks = resp.tracks;
+      console.log(this.tracks);
+    });
+  }
+
+  // Este Método devuelve únicamente la información referente al artista que recibe como parametro!
+  getArtista(id: string) {
+    let url = `${this.urlSpotify}artists/${id}`;
+    let headers = this.getHeaders();
+
+    return this.http.get(url, { headers });
+    // .map((resp: any) => {
+    //   this.artistas = resp.artists.items;
+    //   return this.artistas;
+    // });
+  }
+
+  }

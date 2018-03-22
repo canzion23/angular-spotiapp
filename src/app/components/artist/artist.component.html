@@ -1,30 +1,73 @@
 <div class="container top30">
     <div class="row">
-        <div class="col-md-5">
-            <img class="img-resposive img-circle" [src]="artista.images | noimagen">
+        <div class="col-md-3">
+            <img class="img-resposive img-circle img-thumbnail" [src]="artista.images | noimagen">
         </div>
-        <div class="col-md-7">
+        <div class="col-md-9">
+            <h1> {{ artista.name }}</h1>
+            <hr>
+
+
+            <a [href]="artista.external_urls?.spotify" target="_blank" class="btn btn-outline-success"> Abrir Spotify</a>
+            <button [routerLink]="['/search']" type="button" class="btn btn-outline-danger"> Regresar</button>
+
+        </div>
+        <!-- <div class="col-md-9">
             <div class="card text-white bg-dark mb-3">
+                <div class="card-header">
+                    <h5>{{ artista.name }}</h5>
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">{{ artista.name }}</h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><a href="#" class="btn btn-secondary btn-block">Back...</a></li>
-                        <li class="list-group-item"><a href="#" class="card-link">Go to Spotify</a></li>
+                    <!-- <h5 class="card-title">{{ artista.name }}</h5> -->
+        <!-- <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a [routerLink]="['/search']" class="btn btn-secondary btn-block">Regresar</a></li>
+                        <li class="list-group-item"><a [href]="artista.href" class="card-link">Go to Spotify</a></li>
                     </ul>
                 </div>
-            </div>
-        </div>
+            </div> -->
     </div>
-    <br>
-    <div class="row">
+    <div class="row top30">
         <div class="col-md-12">
-            <div class="list-group">
-                <button type="button" class="list-group-item list-group-item-action text-white bg-dark">
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Foto</th>
+                        <th>Nombre</th>
+                        <th>Popularidad</th>
+                        <th>Escuchar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let pista of _spotify.tracks; let i = index">
+                        <td> {{ i + 1 }} </td>
+                        <td><img [src]="pista.album.images | noimagen:2"></td>
+                        <td>{{pista.name}}</td>
+                        <td> {{pista.popularity}}% </td>
+                        <td>
+                            <audio controls>
+                      <source [src]="pista.preview_url">
+                        Tu navegador es muy viejo
+                      </audio>
+                            <!-- <iframe [src]="pista.uri | domseguro: 'https://open.spotify.com/embed?uri='" width="250" height="80" frameborder=" 0 " allow="encrypted-media " allowtransparency="true "></iframe> -->
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+            <!-- <div class="list-group ">
+            <button type="button " class="list-group-item list-group-item-action text-white bg-dark ">
                   Top tracks
               </button>
-                <button type="button" class="list-group-item list-group-item-action" *ngFor="let artista of _spotify.artistas">{{artista.name}}</button>
-            </div>
+            <button type="button " class="list-group-item list-group-item-action " *ngFor="let pista of _spotify.tracks ">
+                          <img [src]="pista.album.images | noimagen:2 ">
+                          {{pista.name}}
+                        </button>
+
+        </div> -->
 
         </div>
 
     </div>
+
+</div>

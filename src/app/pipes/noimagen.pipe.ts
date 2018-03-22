@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class NoimagenPipe implements PipeTransform {
 
-  transform(imagenes: any[]): any {
+  transform(imagenes: any[], pocision: number = 1): any {
 
     let noimagen: string = "assets/img/noimage.png";
 
@@ -13,7 +13,10 @@ export class NoimagenPipe implements PipeTransform {
       return noimagen;
     }
 
-    return (imagenes.length > 0 ) ? imagenes[1].url : noimagen;
+    if (pocision != null ) {
+      return (imagenes.length > 0) ? imagenes[pocision].url : noimagen;
+
+    }
 
   }
 

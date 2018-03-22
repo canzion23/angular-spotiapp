@@ -13,13 +13,15 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { ArtistComponent } from './components/artist/artist.component';
 import { RouterModule } from '@angular/router';
-
 
 // Servicios
 import { SpotifyService } from './services/spotify.service';
+
+// Pipes
 import { NoimagenPipe } from './pipes/noimagen.pipe';
-import { ArtistComponent } from './components/artist/artist.component';
+import { DomseguroPipe } from './pipes/domseguro.pipe';
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import { ArtistComponent } from './components/artist/artist.component';
     SearchComponent,
     NavbarComponent,
     NoimagenPipe,
-    ArtistComponent
+    ArtistComponent,
+    DomseguroPipe
   ],
   imports: [
     BrowserModule,
